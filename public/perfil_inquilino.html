@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Inquilino - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html" class="active"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Perfil de Inquilino</h1>
+            <button type="button" onclick="window.location.href='inquilinos_admin.html'" class="btn-sidebar">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>
+        </header>
+
+        <section class="profile-card">
+            <div class="profile-header">
+                <h2 id="prof-nombre">Cargando...</h2>
+                <span id="prof-estado" class="badge">--</span>
+            </div>
+            <div class="profile-grid">
+                <div><strong>DNI:</strong> <span id="prof-dni">--</span></div>
+                <div><strong>Puesto Actual:</strong> <span id="prof-puesto">--</span></div>
+                <div><strong>Celular:</strong> <span id="prof-celular">--</span> <button type="button" class="btn-text">Actualizar</button></div>
+                <div><strong>Dirección:</strong> <span id="prof-direccion">--</span> <button type="button" class="btn-text">Actualizar</button></div>
+            </div>
+            <div class="profile-files">
+                <p><strong>Fichas de Datos:</strong></p>
+                <button type="button" class="btn-sidebar" onclick="alert('Módulo de archivos de DNI listo')"><i class="fa-solid fa-id-card"></i> Foto de DNI (Subir/Descargar)</button>
+                <button type="button" class="btn-sidebar" onclick="alert('Módulo de Recibo de Luz/Agua listo')"><i class="fa-solid fa-file-invoice"></i> Recibo de Luz/Agua (Subir/Descargar)</button>
+            </div>
+        </section>
+
+        <section class="saldo-section">
+            <div>
+                <h2 style="color: var(--color-error);">Deuda Total: S/. <span id="total-deuda">0.00</span></h2>
+            </div>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <h2 style="color: var(--color-verde-oscuro);">Saldo a favor: S/. <span id="prof-saldo">0.00</span></h2>
+                <button type="button" id="btn-modificar-saldo" class="btn-submit" style="width: auto; margin: 0;">
+                    <i class="fa-solid fa-coins"></i> Modificar Saldo
+                </button>
+            </div>
+        </section>
+
+        <section class="table-section" style="margin-bottom: 1.75rem;">
+            <h2>Deudas Activas (Vencidas y Pendientes)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Estado</th>
+                        <th>Puesto</th>
+                        <th>Fecha (DD/MM/AAAA)</th>
+                        <th>Monto (S/.)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-deudas"></tbody>
+            </table>
+        </section>
+
+        <section class="table-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>Pagos Realizados</h2>
+                <button type="button" id="btn-exportar" class="btn-sidebar" style="background-color: var(--color-verde-limon); color: #000000;">
+                    <i class="fa-solid fa-file-excel"></i> Guardar (Exportar)
+                </button>
+            </div>
+            <table class="data-table" id="tabla-historial">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Estado</th>
+                        <th>Puesto</th>
+                        <th>Fecha de Pago</th>
+                        <th>Total Abonado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-pagos"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/admin_perfil_inquilino.js"></script>
+</body>
+</html>

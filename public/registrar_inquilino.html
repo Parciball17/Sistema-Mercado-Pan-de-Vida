@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Inquilino - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html" class="active"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Registrar Nuevo Inquilino</h1>
+            <button type="button" onclick="window.location.href='inquilinos_admin.html'" class="btn-sidebar">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>
+        </header>
+
+        <section class="profile-card" style="max-width: 720px;">
+            <div class="profile-header">
+                <h2 style="color: var(--color-verde-oscuro);"><i class="fa-solid fa-user-plus"></i> Datos del Comerciante</h2>
+            </div>
+
+            <form id="form-registrar-inquilino">
+                <div class="profile-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label for="dni">DNI / Carnet de Extranjería *</label>
+                        <input type="text" id="dni" name="dni" placeholder="Ej. 45871234" required minlength="8" maxlength="15" inputmode="numeric">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="celular">Celular</label>
+                        <input type="tel" id="celular" name="celular" placeholder="Ej. 987654321" maxlength="20" inputmode="numeric">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nombres">Nombres *</label>
+                        <input type="text" id="nombres" name="nombres" placeholder="Ej. Juan Carlos" required maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellidos">Apellidos *</label>
+                        <input type="text" id="apellidos" name="apellidos" placeholder="Ej. Quispe Mamani" required maxlength="100">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Ej. Av. Gloriabamba Mz L1 Lt 28, Puente Piedra" maxlength="255">
+                </div>
+
+                <hr style="margin: 1.25rem 0; border: 0; border-top: 1px dashed var(--color-borde);">
+
+                <div class="profile-grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+                    <div class="form-group">
+                        <label for="puesto_codigo">Asignar Puesto Libre (Opcional)</label>
+                        <select id="puesto_codigo" name="puesto_codigo" class="search-bar" style="width: 100%; padding: 0.65rem;">
+                            <option value="">-- Sin puesto (Registrar como Inactivo) --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="grupo-fecha-inicio" style="display: none;">
+                        <label for="fecha_inicio">Fecha de Inicio de Contrato</label>
+                        <input type="date" id="fecha_inicio" name="fecha_inicio" class="search-bar" style="width: 100%; padding: 0.6rem;">
+                    </div>
+                </div>
+
+                <p id="error-registro" class="error-msg" role="alert" style="margin-top: 0.75rem;"></p>
+
+                <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <button type="submit" id="btn-guardar-inquilino" class="btn-submit" style="width: auto; margin: 0; padding: 0.7rem 1.5rem;">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar Inquilino
+                    </button>
+                    <button type="button" onclick="window.location.href='inquilinos_admin.html'" class="btn-sidebar">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/admin_registrar_inquilino.js"></script>
+</body>
+</html>

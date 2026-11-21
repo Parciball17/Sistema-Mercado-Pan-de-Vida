@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Puesto - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html" class="active"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Perfil de Puesto: <span id="puesto-codigo-titulo">--</span></h1>
+            <button type="button" onclick="window.location.href='puestos_admin.html'" class="btn-sidebar">
+                <i class="fa-solid fa-arrow-left"></i> Volver
+            </button>
+        </header>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem; margin-bottom: 1.5rem;">
+            <section class="profile-card" style="margin-bottom: 0;">
+                <h2 style="color: var(--color-verde-oscuro); margin-bottom: 1rem;"><i class="fa-solid fa-ruler-combined"></i> Características y Precios</h2>
+                <div class="profile-grid" style="grid-template-columns: 1fr;">
+                    <div><strong>Espacio:</strong> <span id="p-tamanio">--</span></div>
+                    <div><strong>Puertas:</strong> <span id="p-puertas">--</span></div>
+                    <div style="margin-top: 0.65rem; border-top: 1px dashed var(--color-borde); padding-top: 0.65rem;">
+                        <strong>Pago por Alquiler:</strong> S/. <span id="p-alquiler">--</span>
+                        <button type="button" class="btn-text btn-cambiar-precio" data-col="precio_alquiler">Cambiar</button>
+                    </div>
+                    <div><strong>Recibo de Luz:</strong> S/. <span id="p-luz">--</span> <button type="button" class="btn-text btn-cambiar-precio" data-col="precio_luz">Cambiar</button></div>
+                    <div><strong>Recibo de Agua (Sedapal):</strong> S/. <span id="p-agua">--</span> <button type="button" class="btn-text btn-cambiar-precio" data-col="precio_agua">Cambiar</button></div>
+                    <div><strong>Mantenimiento:</strong> S/. <span id="p-mantenimiento">--</span> <button type="button" class="btn-text btn-cambiar-precio" data-col="precio_mantenimiento">Cambiar</button></div>
+                    <div><strong>Vigilancia:</strong> S/. <span id="p-vigilancia">--</span> <button type="button" class="btn-text btn-cambiar-precio" data-col="precio_vigilancia">Cambiar</button></div>
+                    <div style="margin-top: 0.65rem; font-size: 1.1rem; color: var(--color-verde-oscuro);">
+                        <strong>Pago Mensual Total:</strong> S/. <span id="p-total">--</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card" style="margin-bottom: 0;">
+                <h2 style="color: var(--color-texto-oscuro); margin-bottom: 1rem;"><i class="fa-solid fa-user-tie"></i> Ocupación</h2>
+                <div class="profile-grid" style="grid-template-columns: 1fr;">
+                    <div><strong>Inquilino Actual:</strong> <span id="p-inquilino">--</span></div>
+                    <div><strong>DNI:</strong> <span id="p-dni">--</span></div>
+                    <div><strong>Estado Inquilino:</strong> <span id="p-estado-inq">--</span></div>
+                    <div><strong>Inicio de Contrato:</strong> <span id="p-inicio">--</span></div>
+                    <div><strong>Próximo Vencimiento:</strong> <span id="p-fin">--</span></div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--color-borde);">
+                        <strong>Estado Físico del Puesto:</strong>
+                        <span id="p-estado-fisico" class="badge-puesto" style="margin-left: 0.65rem;">--</span>
+                    </div>
+
+                    <!-- Bloque visible solo cuando el puesto está Libre -->
+                    <div id="bloque-asignar-inquilino" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed var(--color-borde);">
+                        <div class="form-group" style="margin-bottom: 0.75rem;">
+                            <label for="select-inquilino-asignar"><strong>Asignar Inquilino Disponible:</strong></label>
+                            <select id="select-inquilino-asignar" class="search-bar" style="width: 100%; padding: 0.6rem; margin-top: 0.35rem;">
+                                <option value="">-- Seleccione un inquilino --</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 0.85rem;">
+                            <label for="fecha-inicio-asignar"><strong>Fecha de Inicio de Contrato:</strong></label>
+                            <input type="date" id="fecha-inicio-asignar" class="search-bar" style="width: 100%; padding: 0.55rem; margin-top: 0.35rem;">
+                        </div>
+                        <button type="button" id="btn-asignar-inquilino" class="btn-submit" style="margin: 0; width: auto; padding: 0.65rem 1.25rem;">
+                            <i class="fa-solid fa-user-plus"></i> Asignar Inquilino al Puesto
+                        </button>
+                    </div>
+
+                    <div style="margin-top: 1.25rem; display: flex; gap: 0.65rem; flex-wrap: wrap;">
+                        <button type="button" id="btn-inhabilitar" class="btn-submit" style="margin: 0; width: auto; background-color: #fde047; color: #000000;">
+                            <i class="fa-solid fa-lock"></i> Bloquear Puesto
+                        </button>
+                        <button type="button" id="btn-dar-baja" class="btn-borrar" style="margin: 0;">
+                            <i class="fa-solid fa-user-xmark"></i> Dar de Baja
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="table-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>Deudas del Puesto</h2>
+                <button type="button" id="btn-agregar-deuda" class="btn-sidebar" style="background-color: var(--color-azul-claro); color: #000000; border: none;">
+                    <i class="fa-solid fa-plus"></i> Agregar Deuda
+                </button>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Estado</th>
+                        <th>Fecha Emisión</th>
+                        <th>Monto (S/.)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-deudas-puesto"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/admin_perfil_puesto.js"></script>
+</body>
+</html>

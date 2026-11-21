@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú del portal de inquilino">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Portal de Inquilino</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_cliente.html" class="active"><i class="fa-solid fa-user"></i> Mi Estado de Cuenta</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Bienvenido(a), <span id="cliente-nombre-titulo" style="color: var(--color-verde-oscuro);">Cargando...</span></h1>
+        </header>
+
+        <section class="profile-card">
+            <div class="profile-header">
+                <h2>Mis Datos</h2>
+                <span id="cliente-estado" class="badge">--</span>
+            </div>
+            <div class="profile-grid">
+                <div><strong>DNI:</strong> <span id="cliente-dni">--</span></div>
+                <div><strong>Puesto Actual:</strong> <span id="cliente-puesto">--</span></div>
+                <div><strong>Celular:</strong> <span id="cliente-celular">--</span></div>
+                <div><strong>Dirección:</strong> <span id="cliente-direccion">--</span></div>
+            </div>
+
+            <div class="saldo-section" style="margin-top: 1.25rem; margin-bottom: 0;">
+                <div>
+                    <h2 style="color: var(--color-error);">Deuda Total: S/. <span id="cliente-total-deuda">0.00</span></h2>
+                </div>
+                <div>
+                    <h2 style="color: var(--color-verde-oscuro);">Saldo a favor: S/. <span id="cliente-saldo">0.00</span></h2>
+                    <p style="font-size: 0.82rem; color: var(--color-texto-claro); margin-top: 0.25rem;">*El saldo a favor se usa para pagar tus recibos automáticamente.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="table-section" style="margin-bottom: 1.75rem;">
+            <h2 style="color: var(--color-error);"><i class="fa-solid fa-circle-exclamation"></i> Mis Deudas Activas</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Estado</th>
+                        <th>Puesto</th>
+                        <th>Fecha Emisión</th>
+                        <th>Monto (S/.)</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-deudas-cliente"></tbody>
+            </table>
+        </section>
+
+        <section class="table-section">
+            <h2 style="color: var(--color-verde-oscuro);"><i class="fa-solid fa-circle-check"></i> Mis Pagos Realizados</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Detalle</th>
+                        <th>Estado</th>
+                        <th>Puesto</th>
+                        <th>Fecha de Pago</th>
+                        <th>Total Abonado</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-pagos-cliente"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/cliente_principal.js"></script>
+</body>
+</html>

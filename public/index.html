@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 0.5rem;">
+            <button type="button" id="btn-dark-mode" class="btn-text" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+        </div>
+
+        <div class="login-header">
+            <h1>Mercado Pan de Vida</h1>
+            <p>Sistema de Gestión - Puente Piedra</p>
+        </div>
+
+        <div class="login-tabs" role="tablist">
+            <button type="button" class="tab-btn active" id="btn-tab-admin" role="tab" aria-selected="true">Administrador</button>
+            <button type="button" class="tab-btn" id="btn-tab-inquilino" role="tab" aria-selected="false">Inquilino</button>
+        </div>
+
+        <!-- Formulario Administrador -->
+        <form id="form-admin" class="login-form active" aria-label="Formulario de acceso para Administrador">
+            <div class="form-group">
+                <label for="admin-user">Usuario</label>
+                <input type="text" id="admin-user" placeholder="Ej. Parciball" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-pass">Contraseña</label>
+                <input type="password" id="admin-pass" placeholder="Ingresa tu contraseña" required>
+            </div>
+            <button type="submit" class="btn-submit">Ingresar como Admin</button>
+            <p id="error-admin" class="error-msg" role="alert"></p>
+        </form>
+
+        <!-- Formulario Inquilino (Solo DNI de 8 dígitos - WCAG 3.3.4) -->
+        <form id="form-inquilino" class="login-form" aria-label="Formulario de acceso para Inquilino por DNI">
+            <div class="form-group">
+                <label for="inquilino-dni">Documento Nacional de Identidad (DNI - 8 dígitos)</label>
+                <input type="text" id="inquilino-dni" placeholder="Ingresa tus 8 dígitos de DNI" required maxlength="8" pattern="[0-9]{8}" inputmode="numeric">
+            </div>
+            <button type="submit" class="btn-submit">Ingresar como Inquilino</button>
+            <p id="error-inquilino" class="error-msg" role="alert"></p>
+        </form>
+    </div>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

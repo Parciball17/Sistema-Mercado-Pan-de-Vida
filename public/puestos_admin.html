@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puestos - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html" class="active"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Gestión de Puestos</h1>
+        </header>
+
+        <section class="table-section">
+            <div class="controls-container">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="input-busqueda" placeholder="Buscar por Código (Ej. L5) o Inquilino..." class="search-bar" aria-label="Buscar puesto por código o inquilino">
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="codigo">Puesto <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="tipo">Tipo / Pabellón <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="estado_fisico">Estado Físico <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="estado_pago">Estado de Pago <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="inquilino">Inquilino Actual <i class="fa-solid fa-sort"></i></th>
+                        <th>Deuda Activa</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-puestos"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/admin_puestos.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquilinos - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html" class="active"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Gestión de Inquilinos</h1>
+        </header>
+
+        <section class="table-section">
+            <div class="controls-container">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="input-busqueda" placeholder="Buscar por Nombre o DNI..." class="search-bar" aria-label="Buscar inquilino por nombre o DNI">
+                </div>
+                <a href="registrar_inquilino.html" class="btn-submit" style="width: auto; text-decoration: none; padding: 0.65rem 1.25rem;">
+                    <i class="fa-solid fa-plus"></i> Registrar Inquilino
+                </a>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-column="nombre">Nombre <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="tipo">Tipo <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="estado">Estado <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="dni">DNI <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="puesto">Puesto <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-column="estado_pago">Estado de Pago <i class="fa-solid fa-sort"></i></th>
+                        <th>Deuda Activa</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-inquilinos"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/admin_inquilinos.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresos y Egresos - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html" class="active"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Flujo de Caja del Mercado</h1>
+        </header>
+
+        <section class="table-section" style="margin-bottom: 1.75rem;">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+                <div style="display: flex; gap: 0.65rem; align-items: center; flex-wrap: wrap;">
+                    <strong>Filtrar:</strong>
+                    <input type="month" id="filtro-mes" class="search-bar" style="width: auto; padding: 0.5rem;">
+                    <select id="filtro-tipo" class="search-bar" style="width: auto; padding: 0.5rem;">
+                        <option value="">Todos los Tipos</option>
+                        <option value="Ingreso">Solo Ingresos</option>
+                        <option value="Egreso">Solo Egresos (Sedapal / Servicios)</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 0.65rem;">
+                    <button type="button" id="btn-add-egreso" class="btn-borrar"><i class="fa-solid fa-minus"></i> Agregar Egreso</button>
+                    <button type="button" id="btn-add-ingreso" class="btn-submit" style="width: auto; margin: 0; padding: 0.5rem 1rem;"><i class="fa-solid fa-plus"></i> Agregar Ingreso</button>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Inquilino / Entidad</th>
+                        <th>Detalle</th>
+                        <th>Fecha de Pago</th>
+                        <th>Total (S/.)</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-general"></tbody>
+            </table>
+        </section>
+
+        <section class="profile-card" style="border-top-color: var(--color-verde-oscuro);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+                <div>
+                    <h2 style="color: var(--color-verde-oscuro); margin-bottom: 0.65rem;">Cálculo por Periodo</h2>
+                    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                        <label>Inicio: <input type="date" id="fecha-inicio" class="search-bar" style="width: auto; padding: 0.4rem;"></label>
+                        <label>Fin: <input type="date" id="fecha-fin" class="search-bar" style="width: auto; padding: 0.4rem;"></label>
+                        <button type="button" id="btn-calcular" class="btn-submit" style="width: auto; margin: 0;"><i class="fa-solid fa-calculator"></i> Calcular</button>
+                    </div>
+                </div>
+                <button type="button" id="btn-exportar" class="btn-sidebar" style="background-color: #107c41; color: #ffffff;">
+                    <i class="fa-solid fa-file-excel"></i> Guardar (Exportar Excel)
+                </button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <div style="max-height: 300px; overflow-y: auto; border: 1px solid var(--color-borde); border-radius: 0.375rem;">
+                    <table class="data-table" id="tabla-exportar">
+                        <thead style="position: sticky; top: 0; z-index: 1;">
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Inquilino/Entidad</th>
+                                <th>Detalle</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-periodo">
+                            <tr><td colspan="5" style="text-align: center;">Seleccione un periodo y presione Calcular</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="saldo-section" style="flex-direction: column; align-items: flex-start; gap: 0.65rem; margin: 0; padding: 1.25rem;">
+                    <div style="width: 100%; display: flex; justify-content: space-between;"><span>Días Seleccionados:</span> <strong id="res-dias">0</strong></div>
+                    <div style="width: 100%; display: flex; justify-content: space-between;"><span>Datos Encontrados:</span> <strong id="res-datos">0</strong></div>
+                    <hr style="width: 100%; border: 0; border-top: 1px dashed var(--color-borde);">
+                    <div style="width: 100%; display: flex; justify-content: space-between; color: var(--color-verde-oscuro);"><span>Cantidad de Ingresos:</span> <strong id="res-cant-ing">0</strong></div>
+                    <div style="width: 100%; display: flex; justify-content: space-between; color: var(--color-verde-oscuro);"><span>Ingresos Totales:</span> <strong id="res-tot-ing">S/. 0.00</strong></div>
+                    <hr style="width: 100%; border: 0; border-top: 1px dashed var(--color-borde);">
+                    <div style="width: 100%; display: flex; justify-content: space-between; color: var(--color-error);"><span>Cantidad de Egresos:</span> <strong id="res-cant-egr">0</strong></div>
+                    <div style="width: 100%; display: flex; justify-content: space-between; color: var(--color-error);"><span>Egresos Totales:</span> <strong id="res-tot-egr">S/. 0.00</strong></div>
+                    <hr style="width: 100%; border: 0; border-top: 2px solid var(--color-verde-limon);">
+                    <div style="width: 100%; display: flex; justify-content: space-between; font-size: 1.15rem;">
+                        <strong>Ganancias del Periodo:</strong>
+                        <strong id="res-ganancia" style="color: var(--color-verde-oscuro);">S/. 0.00</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/admin_ingresos_egresos.js"></script>
+</body>
+</html>

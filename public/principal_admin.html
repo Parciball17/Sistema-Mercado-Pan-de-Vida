@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Admin - Mercado Pan de Vida</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Slide Bar (Barra Lateral) -->
+    <nav class="sidebar" aria-label="Menú principal de administración">
+        <div class="sidebar-header">
+            <h2>Pan de Vida</h2>
+            <p>Admin: <span id="admin-name">Cargando...</span></p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="principal_admin.html" class="active"><i class="fa-solid fa-chart-pie"></i> Principal</a></li>
+            <li><a href="inquilinos_admin.html"><i class="fa-solid fa-users"></i> Inquilinos</a></li>
+            <li><a href="puestos_admin.html"><i class="fa-solid fa-store"></i> Puestos</a></li>
+            <li><a href="ingresos_egresos_admin.html"><i class="fa-solid fa-file-invoice-dollar"></i> Ingresos y Egresos</a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <button type="button" id="btn-dark-mode" class="btn-sidebar" aria-label="Alternar Modo Oscuro de Alto Contraste">
+                <i class="fa-solid fa-moon"></i> Modo Oscuro
+            </button>
+            <button type="button" id="btn-logout" class="btn-sidebar btn-logout" aria-label="Cerrar sesión administrativa">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesión
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Panel de Control</h1>
+        </header>
+
+        <!-- Tarjetas de Estadísticas -->
+        <section class="stats-container" aria-label="Indicadores clave del mercado">
+            <div class="stat-card"><h3>Puestos Ocupados</h3><p id="stat-ocupados">--/100</p></div>
+            <div class="stat-card"><h3>Ingreso del Mes</h3><p id="stat-ingresos">S/. --</p></div>
+            <div class="stat-card"><h3>Puestos al Día</h3><p id="stat-aldia">--/--</p></div>
+            <div class="stat-card"><h3>Pagos Pendientes</h3><p id="stat-pendientes">--</p></div>
+        </section>
+
+        <!-- Mapa de Puestos 11x10 y Leyendas -->
+        <section class="map-section" aria-label="Mapa espacial de los 100 puestos">
+            <div class="leyendas">
+                <div class="leyenda-estado">
+                    <h4>Estado del Puesto</h4>
+                    <p><span class="color-box gris"></span> Bloqueado (Inhabilitado)</p>
+                    <p><span class="color-box blanco"></span> Libre (Disponible)</p>
+                    <p><span class="color-box rojo"></span> Vencido (Atrasado)</p>
+                    <p><span class="color-box amarillo"></span> Pendiente (Mes actual)</p>
+                    <p><span class="color-box verde"></span> Al Día (Sin deuda)</p>
+                </div>
+                <div class="leyenda-tipo">
+                    <h4>Tipos y Precios Base</h4>
+                    <p><b>L</b>: Locales (S/. 300 - S/. 1500)</p>
+                    <p><b>P</b>: Puestos Medianos (S/. 250)</p>
+                    <p><b>A</b>: Pabellón A (S/. 120)</p>
+                    <p><b>B</b>: Pabellón B (S/. 120)</p>
+                </div>
+            </div>
+
+            <!-- Cuadrícula 11x10 -->
+            <div id="puestos-grid" class="puestos-grid" role="region" aria-label="Cuadrícula interactiva de 100 puestos comerciales">
+                <!-- Los puestos se generarán con JS con doble codificación visual -->
+            </div>
+        </section>
+
+        <!-- Últimos Pagos -->
+        <section class="table-section">
+            <h2>Últimos Pagos</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>DNI</th>
+                        <th>Fecha (DD/MM/AAAA)</th>
+                        <th>Pago</th>
+                        <th>Saldo a Favor</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-pagos"></tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="js/admin_principal.js"></script>
+</body>
+</html>
